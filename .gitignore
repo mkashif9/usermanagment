@@ -1,0 +1,55 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+
+# Build files
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+
+# Coverage directories
+coverage/
+
+# Optional npm cache directory
+.npm/
+
+# Yarn Integrity File
+.yarn-integrity
+
+# Parcel-bundler cache
+.cache/
+
+# Output from testing
+.jest/
+jest-html-reports/
+
+# Ignore lockfiles (optional)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

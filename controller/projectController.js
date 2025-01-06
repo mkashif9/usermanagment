@@ -2,6 +2,7 @@ const project = require('../db/models/project')
 const catchAsync = require('../catchAsync')
 const createProject =  catchAsync(async (req,res,next) =>{
     const body = req.body
+    const userId = req.user.id;
     const newProject = await project.create({
         title:body.title,
         productImage:body.productImage,
@@ -11,7 +12,7 @@ const createProject =  catchAsync(async (req,res,next) =>{
         productUrl:body.productUrl,
         category:body.category,
         tags:body.tags,
-        createdBy:1
+        createdBy: userId
 
     })
     return res.status(201).json({

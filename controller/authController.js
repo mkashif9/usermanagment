@@ -74,6 +74,34 @@ const login = catchAsync ( async (req,res,next) => {
     message:'Login successfuly!',
     token
    })
+ 
   
 })
- module.exports = { signup ,login };
+
+const  authentication = catchAsync(async(req,res,next) =>{
+  // get the token from headers
+  let useridfromToken = '';
+  if(req.headers.authorization && 
+    req.headers.authorization.startsWith('Bearer')){
+      // Bearer  FkhL8yISCMuq2FMxVOeCoFfL1wYM
+      useridfromToken =req.headers.authorization.split(' ')[1]
+      console.log("authorization console"+ req.headers.authorization);
+      
+    }
+    if(!useridfromToken){
+      return next(new AppError("Please login to get access",401))
+    }
+    // try{
+  // token verification
+  const tokenDetail = jwt.verify(useridfromToken, process.env.JWT_SECRET_KEY) 
+  console.log("token test "+ tokenDetail);
+  
+  // get user detail from db  and add to req object 
+  let freshUser = await user.findByPk(tokenDetail.id)
+  if(!freshUser){
+    return next(new AppError('user no longer exist',400))
+  }
+  req.user = freshUser;
+  return next();
+ })
+ module.exports = { signup ,login,authentication };

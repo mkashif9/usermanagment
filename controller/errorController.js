@@ -35,6 +35,9 @@ const sendErrorProd = (error,res) => {
 
 }
 const golbalErrorHandler = (err,req,res,next) =>{
+     if(err.name === 'JsonWebTokenError'){
+        err = new AppError(' invalid token ',401)
+     }
     if(err.name === "SequelizeValidationError")
         {
            err = new AppError(err.errors[0].message,400)
@@ -43,7 +46,7 @@ const golbalErrorHandler = (err,req,res,next) =>{
      {
         err = new AppError(err.errors[0].message,400)
      }
-     if(process.env.NODE_ENV === 'devlopment'){
+     if(process.env.NODE_ENV === 'development'){
         return sendErrorDev (err,res);
      }
      return sendErrorProd(err,res)

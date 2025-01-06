@@ -49,6 +49,6 @@ const golbalErrorHandler = (err,req,res,next) =>{
      if(process.env.NODE_ENV === 'development'){
         return sendErrorDev (err,res);
      }
-     return sendErrorProd(err,res)
+     return sendErrorProd(err,res);
 }
 module.exports = golbalErrorHandler;

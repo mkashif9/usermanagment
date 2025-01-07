@@ -7,7 +7,8 @@ const {
 const sequelize = require('../../config/database')
 const becrypt = require('bcrypt');
 const AppError = require('../../appError');
-module.exports = sequelize.define('user',
+const project = require('./project');
+const user = sequelize.define('user',
   {
     id: {
       allowNull: false,
@@ -110,3 +111,7 @@ module.exports = sequelize.define('user',
     modelName:'user'
   }
 )
+user.hasMany(project,{foreignKey:'createdBy'});
+project.belongsTo(user,{foreignKey:'createdBy'})
+
+module.exports = user;

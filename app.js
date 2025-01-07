@@ -3,6 +3,7 @@ const express = require('express');
 
 const authRouter = require('./routes/authRoute');
 const projectRouter = require('./routes/projectRoute');
+const userRouter = require('./routes/userRoute');
 const catchAsync = require('./catchAsync');
 const AppError = require('./appError');
 const { stack } = require('sequelize/lib/utils');
@@ -16,6 +17,8 @@ app.use(express.json())
 // all routes go here
 app.use('/api/v1/auth',authRouter);
 app.use('/api/v1/projects',projectRouter);
+app.use('/api/v1/users',userRouter)
+
 app.use(
     '*',
     catchAsync(async(req,res,next) =>
